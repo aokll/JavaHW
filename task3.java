@@ -4,8 +4,12 @@ import java.util.*;
 import java.util.logging.Logger;
 
 public class task3 {
-   public static void main(String[] args) {
-    Logger logging = Logger.getLogger(task3.class)
+    static Logger logging;
+   /**
+ * @param args
+ */
+public static void main(String[] args) {
+        logging = Logger.getLogger(task3.class.getName());
         Scanner scanner = new Scanner(System.in);
         System.out.print("введите первое число ");
         double d1 = scanner.nextDouble();
