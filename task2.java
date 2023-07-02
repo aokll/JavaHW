@@ -1,31 +1,40 @@
 /*2) Реализуйте алгоритм сортировки пузырьком числового массива, результат после каждой итерации
  запишите в лог-файл. */
+import java.io.IOException;
+import java.util.logging.*;
 public class task2 {
-    private long[] a;   //ссылка на массив
-    private int elems;  //количество элементов в массиве
-    public static void main(String[] args) {
-        Integer[] array = new Integer[5]; //Создаем массив array на 5 элементов
-
-        array[0] = 163;       //заполняем массив
-        array[1] = 300;
-        array[2] = 184;
-        array[3] = 191;
-        array[4] = 174;
-
+    public static void main(String[] args) throws IOException {
+        
+        Logger logger = Logger.getLogger(task2.class.getName());
+        FileHandler fh = new FileHandler("file.xml");
+        logger.addHandler(fh);
+        XMLFormatter xml = new XMLFormatter();
+        fh.setFormatter(xml);
+        logger.info("Sort Array");
+        int [] array = {2, 5, 1, -7, 3, 64, 0, 8};
+        int [] newArr = new int[array.length];
+        Printarr(array);
+        newArr = listSort(array);
+        System.out.printf("\n Отсортированный массив: \n");
+        Printarr(newArr);
     }
-
-    public void bubbleSorter(){                      //МЕТОД ПУЗЫРЬКОВОЙ СОРТИРОВКИ
-        for (int out = elems - 1; out >= 1; out--){  //Внешний цикл
-            for (int in = 0; in < out; in++){        //Внутренний цикл
-                if(a[in] > a[in + 1])                //Если порядок элементов нарушен
-                    toSwap(in, in + 1);              //вызвать метод, меняющий местами
+    public static int[] listSort(int [] arr){
+        for(int k = 0; k < arr.length-1; k++) {
+            
+            for (int i = 0; i < arr.length - k-1; i++){
+                if (arr[i] > arr[i+1]) {
+                    int temp = arr[i];
+                    arr[i] = arr[i+1];
+                    arr[i+1] = temp;
+                }
             }
+        }
+        return arr;
     }
-}
-private void toSwap(int first, int second){ //метод меняет местами пару чисел массива
-        long dummy = a[first];              //во временную переменную помещаем первый элемент
-        a[first] = a[second];               //на место первого ставим второй элемент
-        a[second] = dummy;                  //вместо второго элемента пишем первый из временной памяти
+    public static void Printarr(int [] arr){
+        for (int i : arr) {
+            System.out.print(i + " ");
+        }
     }
-
+    
 }
