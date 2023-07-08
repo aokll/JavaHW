@@ -1,12 +1,32 @@
+import java.util.LinkedList;
+import java.util.Random;
 /*Задание
-
-Даны два Deque, представляющие два целых числа. Цифры хранятся в обратном порядке и каждый из их узлов содержит одну цифру.
-1) Умножьте два числа и верните произведение в виде связанного списка.
-2) Сложите два числа и верните сумму в виде связанного списка. Одно или два числа должны быть отрицательными.
-
-Формат сдачи: файл с расширением java или ссылка на гит с подписанными ФИ и номером группы. */
+Пусть дан LinkedList с несколькими элементами. Реализуйте метод, который вернет “перевернутый” список. */
 public class task {
-    public static void main(String[] args) {
-        
+     public static void main(String[] args) {
+        LinkedList<Integer> lst = new LinkedList<>();
+        rand_add_list(10, 100, lst);
+        System.out.println("Исходный список: " + lst);
+
+        LinkedList<Integer> reverse_lst = new LinkedList<>();
+        reverse_list(lst, reverse_lst);
+        System.out.println("Перевернутый список: " + reverse_lst);
+
+    }
+
+    public static void rand_add_list(int count, int maxValue, LinkedList<Integer> list) {
+        Random rand = new Random();
+        for (int i = 0; i < count; i++) {
+            list.add(rand.nextInt(maxValue));
+        }
+    }
+
+    public static LinkedList<Integer> reverse_list(LinkedList<Integer> list, LinkedList<Integer> new_list) {
+        for (int i = 0; i < list.size(); i++) {
+            new_list.add(list.peekLast());
+            list.removeLast();
+            i--;
+        }
+        return new_list;
     }
 }
